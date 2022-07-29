@@ -27,6 +27,18 @@ namespace _Scripts.SpawnBehaviour {
         }
 
         /// <summary>
+        /// Set a circular timer for you.Should be Called in <code>FixedUpdate()</code>.
+        /// </summary>
+        /// <param name="start">The start time of this timer.</param>
+        /// <param name="ord">The order of the timer, range from 1 to 7.</param>
+        /// <param name="period">The period of the timer in frame.</param>
+        protected bool SetTimerWithPeriod(int start, int ord, int period) {
+            Timer[ord] ++;
+            if (Timer[ord] < start) return false;
+            else return ((Timer[ord] - start) % period == 0) ;
+        }
+
+        /// <summary>
         /// Set this spawner's life time.Should be Called in <code>FixedUpdate()</code>.
         /// </summary>
         /// <param name="life">The life time in frame.</param>

@@ -1,24 +1,21 @@
-﻿using System;
-using _Scripts.Bullet;
-using UnityEditor.UIElements;
+﻿using _Scripts.Bullet;
 using UnityEngine;
 
 namespace _Scripts.SpawnBehaviour {
-    public class Spawn01 : SpawnBehaviour {
+    /// <summary>
+    /// Spawn A circle of Bullets which move towards the player.
+    /// </summary>
+    public class Spawn05 : SpawnBehaviour {
         private float _radius;
         private float _degree;
         private void Start() {
             Initialize();
-            _radius = 2.6f;
+            _radius = 0.5f;
         }
 
         private void FixedUpdate() {
-            //Should be called in FixedUpdates.
-            SetLife(210);
-            if (SetTimerWithPeriod(1, 10)) {
-                Spawn();
-                _radius -= 3/8f;
-            }
+            SetLife(300);
+            if(SetTimerWithPeriod(1,15)) Spawn();
         }
 
         protected override void Spawn() {
@@ -28,7 +25,7 @@ namespace _Scripts.SpawnBehaviour {
                 if (TempBullet == null) Debug.Log("NullRef!!");
 
                 //some necessary calculations.
-                _degree = (i * 15 + Timer[0] * 1.5f) * Mathf.Deg2Rad;
+                _degree = (i * 15 + Timer[0] * 5) * Mathf.Deg2Rad;
                 Vector3 direction =
                     new Vector3(Mathf.Cos(_degree), Mathf.Sin(_degree), 0f);
 
@@ -39,19 +36,18 @@ namespace _Scripts.SpawnBehaviour {
                 TempProp.radius = 0.5f;
                 TempProp.direction = direction;
                 TempProp.worldPosition = _radius * direction + transform.position;
-                TempProp.speed = 3f;
+                TempProp.speed = 6f;
                 TempProp.color = Color.white;
 
                 //initialize the bullet
                 //BulletManager.Manager.BulletInitialize(_tempBullet, 21,true);
-                BulletManager.Manager.BulletInitialize(TempBullet, 21, true);
+                var type = (i % 4 == 0) ? 26 : 25;
+                if (type == 25) TempProp.radius /= 2;
+                BulletManager.Manager.BulletInitialize(TempBullet, type, true);
                 BulletManager.Manager.BulletRefresh(TempBullet, TempProp);
 
                 //register the target event
-                TempBullet.StepEvent += BulletManager.Manager.Step01;
-                if (Timer[0] <= 120) {
-                    TempBullet.DestroyEvent += BulletManager.Manager.Destroy01;
-                }
+                TempBullet.StepEvent += BulletManager.Manager.Step05;
             }
         }
     }

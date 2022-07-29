@@ -36,7 +36,21 @@ namespace _Scripts.Bullet {
         private BulletProperties _tempProp;
 
         #region StepEvents
-
+        /// <summary>
+        /// The bullet wont move until its speed reaches below zero.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step00(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            _tempProp.speed -= 0.05f;
+            if(_tempProp.speed < 0f) bullet.SetState(BulletStates.Destroying);
+            BulletRefresh(bullet, _tempProp);
+        }
+        
+        /// <summary>
+        /// The bullet will move on its direction until its speed reaches below zero.
+        /// </summary>
+        /// <param name="bullet"></param>
         public void Step01(Bullet bullet) {
             _tempProp = bullet.Prop;
             _tempProp.speed -= 0.05f;
@@ -44,19 +58,28 @@ namespace _Scripts.Bullet {
             _tempProp.worldPosition += Time.fixedDeltaTime * _tempProp.speed * _tempProp.direction;
             BulletRefresh(bullet, _tempProp);
         }
-
+            
+        //TODO: fix gravity.
+        /// <summary>
+        /// The bullet will fall down faster and faster.
+        /// </summary>
+        /// <param name="bullet"></param>
         public void Step02(Bullet bullet) {
             _tempProp = bullet.Prop;
             if(_tempProp.speed <= 6f) _tempProp.speed += 0.01f;
             var dir = Vector2.Angle(Vector2.up, _tempProp.direction);
             if (dir > 70f) {
-                _tempProp.direction.x = Calc.Approach(_tempProp.direction.x, 0f, 32f);
+                _tempProp.direction.x = Calc.Approach(_tempProp.direction.x, 0f, 48f);
                 _tempProp.direction.y = Calc.Approach(_tempProp.direction.y, -0.5f, 64f);
             }
             _tempProp.worldPosition += Time.fixedDeltaTime * _tempProp.speed * _tempProp.direction;
             BulletRefresh(bullet, _tempProp);
         }
-
+        
+        /// <summary>
+        /// Flower petals. Need parent as heart.
+        /// </summary>
+        /// <param name="bullet"></param>
         public void Step03(Bullet bullet) {
             _tempProp = bullet.Prop;
             if (!_tempProp.parent.gameObject.activeSelf) {
@@ -70,8 +93,27 @@ namespace _Scripts.Bullet {
             _tempProp.rotation = degree + 90f;
             BulletRefresh(bullet, _tempProp);
         }
+        
+        /// <summary>
+        /// The bullet will move on its direction with a steady speed.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step04(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
 
-
+        /// <summary>
+        /// The bullet will move on its direction slower until a steady speed.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step05(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            if(_tempProp.speed >= 0.5f) _tempProp.speed -= 0.1f;
+            _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
         #endregion
 
         #region DestroyEvent
@@ -85,7 +127,7 @@ namespace _Scripts.Bullet {
             prop.direction = bullet.Prop.direction;
             prop.direction.x += Random.Range(-0.3f, 0.3f);
             prop.speed = 2f + Random.Range(-0.3f, 0.3f);
-            prop.color = new Vector4(1,1,1,0.8f);
+            prop.color = Color.white;
             prop.color.a = 0.5f;
             Manager.BulletInitialize(parent, 13, true);
             Manager.BulletRefresh(parent, prop);
