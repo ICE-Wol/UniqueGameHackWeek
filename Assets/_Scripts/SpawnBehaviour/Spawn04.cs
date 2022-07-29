@@ -2,19 +2,23 @@
 using _Scripts.Bullet;
 using UnityEditor.UIElements;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Scripts.SpawnBehaviour {
-    public class Spawn01 : SpawnBehaviour {
+    public class Spawn04 : SpawnBehaviour {
         private float _radius;
         private float _degree;
+        private float _rand;
+        public int cnt;
         private void Start() {
             Initialize();
-            _radius = 2.6f;
+            _radius = 2.2f;
+            _rand = Random.Range(0, 360f);
         }
 
         private void FixedUpdate() {
             //Should be called in FixedUpdates.
-            SetLife(210);
+            SetLife(150);
             if (SetTimerWithPeriod(1, 10)) {
                 Spawn();
                 _radius -= 3/8f;
@@ -23,12 +27,15 @@ namespace _Scripts.SpawnBehaviour {
 
         protected override void Spawn() {
             for (int i = 0; i < 24; i++) {
+                if(i % 12 > 6) continue;
                 //pick a bullet out of the pool
                 TempBullet = BulletManager.Manager.BulletActivate();
                 if (TempBullet == null) Debug.Log("NullRef!!");
 
                 //some necessary calculations.
-                _degree = (i * 15 + Timer[0] * 1.5f) * Mathf.Deg2Rad;
+                if(cnt % 2 == 0)
+                    _degree = (_rand + i * 15 + Timer[0]) * Mathf.Deg2Rad;
+                else _degree = (_rand + i * 15 - Timer[0]) * Mathf.Deg2Rad;
                 Vector3 direction =
                     new Vector3(Mathf.Cos(_degree), Mathf.Sin(_degree), 0f);
 
@@ -49,9 +56,7 @@ namespace _Scripts.SpawnBehaviour {
 
                 //register the target event
                 TempBullet.StepEvent += BulletManager.Manager.Step01;
-                if (Timer[0] <= 120) {
-                    TempBullet.DestroyEvent += BulletManager.Manager.Destroy01;
-                }
+                TempBullet.DestroyEvent += BulletManager.Manager.Destroy02;
             }
         }
     }
