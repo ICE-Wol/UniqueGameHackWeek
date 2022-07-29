@@ -2,9 +2,6 @@
 using UnityEngine;
 
 namespace _Scripts.SpawnBehaviour {
-    /// <summary>
-    /// Spawn A circle of Bullets which move towards the player.
-    /// </summary>
     public class Spawn06 : SpawnBehaviour {
         private float _radius;
         private float _degree;
@@ -54,6 +51,7 @@ namespace _Scripts.SpawnBehaviour {
 
                 //register the target event
                 TempBullet.StepEvent += BulletManager.Manager.Step07;
+                TempBullet.StepEvent += BulletManager.Manager.Destroy03;
             }
         }
     }

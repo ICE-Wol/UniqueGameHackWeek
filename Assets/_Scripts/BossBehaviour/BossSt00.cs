@@ -8,8 +8,17 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.BossBehaviour {
-    public class BossSt00 : BossBehaviour
-    {
+    public class BossSt00 : BossBehaviour {
+        public static BossSt00 BSt00;
+        private void Start() {
+            if (BSt00 == null) {
+                BSt00 = this;
+            }
+            else {
+                Destroy(this.gameObject);
+            }
+            SwitchCard(3,1);
+        }
         protected override void SwitchForm(int ordForm) {
             
         }
@@ -76,14 +85,22 @@ namespace _Scripts.BossBehaviour {
                             }
                         };
                         var spawn = obj.AddComponent<Spawn06>();
+                        var spawn2 = obj.AddComponent<Spawn08>();
+                    });
+                    break;
+                case 31:
+                    CreateSpawner(300, () => {
+                        var obj = new GameObject {
+                            transform = {
+                                position = this.transform.position
+                            }
+                        };
+                        var spawn = obj.AddComponent<Spawn09>();
+                        var movement = obj.AddComponent<Movement02>();
                     });
                     break;
 
             }
-        }
-
-        private void Start() {
-            SwitchCard(3,0);
         }
     }
 }

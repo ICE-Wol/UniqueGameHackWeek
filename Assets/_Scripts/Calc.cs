@@ -7,6 +7,9 @@ namespace _Scripts {
         public static bool Equal(float argument1, float argument2) {
             return Mathf.Abs(argument1 - argument2) <= _epsilon;
         }
+        public static bool Equal(float argument1, float argument2, float epsilon) {
+            return Mathf.Abs(argument1 - argument2) <= epsilon;
+        }
         
         public static bool Equal(Vector3 argument1, Vector3 argument2) {
             return Equal(argument1.x, argument2.x) &&

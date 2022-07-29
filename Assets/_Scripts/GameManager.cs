@@ -7,6 +7,8 @@ namespace _Scripts {
         public static GameManager Manager;
         [SerializeField] private TextMeshProUGUI textMesh;
         [SerializeField] private GameObject[] instantiateList;
+        public Vector2 TopLeft;
+        public Vector2 BottomRight;
         private int _numGraze;
         public int WorldTimer { private set; get; }
         public int NumGraze {

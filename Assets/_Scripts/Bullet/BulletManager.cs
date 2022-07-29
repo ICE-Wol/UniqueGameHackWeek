@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using _Scripts.BossBehaviour;
+using _Scripts.SpawnBehaviour;
 using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 //U should be informed that all classes which u define are implicitly derived from the class Object.
 //And among all the types they are all value type except of the class Object and String.
@@ -38,7 +43,7 @@ namespace _Scripts.Bullet {
 
         #region StepEvents
         /// <summary>
-        /// The bullet wont move until its speed reaches below zero.
+        /// The bullet wont move ,and will be destroyed shortly.
         /// </summary>
         /// <param name="bullet"></param>
         public void Step00(Bullet bullet) {
@@ -135,8 +140,42 @@ namespace _Scripts.Bullet {
             _tempProp = bullet.Prop;
             if(_tempProp.speed >= 0.5f + 0.1f * _tempProp.order) _tempProp.speed -= 0.1f;
             _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            var x = _tempProp.worldPosition.x;
+            var y = _tempProp.worldPosition.y;
+            if(x <= GameManager.Manager.TopLeft.x || x >= GameManager.Manager.BottomRight.x ||
+               y >= GameManager.Manager.TopLeft.y || y <= GameManager.Manager.BottomRight.y)
+                   bullet.SetState(BulletStates.Destroying);
             BulletRefresh(bullet, _tempProp);
         }
+        
+        /// <summary>
+        /// The bullet will move on its direction slower until a steady speed according to its order.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step08(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            if (_tempProp.speed >= 0f && _tempProp.order == 0) _tempProp.speed -= 0.1f;
+            if (_tempProp.speed < 0f) _tempProp.order = 1;
+            if (_tempProp.order == 1) _tempProp.speed = 0;
+            if (_tempProp.order > 0) _tempProp.order++;
+            if (_tempProp.order >= 60) _tempProp.speed = 2f;
+            _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
+
+        /// <summary>
+        /// The bullet wont move until its speed reaches below zero.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step09(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            _tempProp.speed -= 0.05f;
+            if (_tempProp.speed < 0f)
+                _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
+
+
         #endregion
 
         #region DestroyEvent
@@ -211,6 +250,17 @@ namespace _Scripts.Bullet {
                 //register the target event
                 tempBullet.StepEvent += Manager.Step06;
             }
+        }
+
+        public void Destroy03(Bullet bullet) {
+            BossSt00.BSt00.CreateSpawner(() => {
+                var obj = new GameObject {
+                    transform = {
+                        position = bullet.transform.position
+                    }
+                };
+                var spawn = obj.AddComponent<Spawn07>();
+            });
         }
 
         #endregion

@@ -18,5 +18,9 @@ namespace _Scripts.BossBehaviour {
             if((GameManager.Manager.WorldTimer - StartTime) % loopTime == 0)
                 action?.Invoke();
         }
+        
+        public void CreateSpawner(Action action) {
+            action?.Invoke();
+        }
     }
 }
