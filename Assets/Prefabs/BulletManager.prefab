@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4218034707889676462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5798253715522321928}
+  - component: {fileID: 7075205840708759642}
+  m_Layer: 0
+  m_Name: BulletManager
+  m_TagString: Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5798253715522321928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218034707889676462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7075205840708759642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218034707889676462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171a578588dda3949abec39d58c1743e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8993787310067180184, guid: ed764703bfbde1f409a22dbbaca81d88, type: 3}
+  bulletSprite:
+  - {fileID: -1820344889, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: -1427606839, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: -1071652077, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 581416056, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 1137769113, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 360931657, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 1335888056, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 924864969, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 1313065885, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: -1775981199, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: 1449386972, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: -293476615, guid: ff708b9fd6865cc4c833e86e6ad4ac92, type: 3}
+  - {fileID: -364094480, guid: ff708b9fd6865cc4c833e86e6ad4ac92, type: 3}
+  - {fileID: -1640126929, guid: ff708b9fd6865cc4c833e86e6ad4ac92, type: 3}
+  - {fileID: 1449386972, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
+  - {fileID: -19536816, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: 863078833, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: -1489671232, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: -1028816524, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: 555196694, guid: 19ad7904717b5db4db062a8c3c40a613, type: 3}
+  - {fileID: 21300000, guid: f8f8317bb66ed6246b6d7d184153bacd, type: 3}
+  - {fileID: 1895152376, guid: 900e75d85d82d8c429f13826c9cf2fa3, type: 3}
+  laserSprite:
+  - {fileID: 131209717, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -1389009222, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -1082788747, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 736603899, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -1888280373, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 1232016279, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -790745942, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 450454754, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -1178721052, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 1613694290, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -2056903256, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 1628125029, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -1990654696, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 897881349, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: 1193975944, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  - {fileID: -56231887, guid: 0306547681a72034da4fd11eff053494, type: 3}
+  material:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f8974c078b2d95d49934dcb6e105bb01, type: 2}
