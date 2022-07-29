@@ -14,7 +14,7 @@ namespace _Scripts.BossBehaviour {
 
         protected abstract void SwitchForm(int ordForm);
         protected abstract void SwitchCard(int ordForm, int ordCard);
-        protected void CreateSpawner(float loopTime, Action action) {
+        public void CreateSpawner(float loopTime, Action action) {
             if((GameManager.Manager.WorldTimer - StartTime) % loopTime == 0)
                 action?.Invoke();
         }

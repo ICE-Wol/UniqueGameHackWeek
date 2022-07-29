@@ -65,6 +65,17 @@ namespace _Scripts.BossBehaviour {
                             }
                         };
                         var spawn = obj.AddComponent<Spawn04>();
+                        spawn.cnt = 1;
+                    });
+                    break;
+                case 30:
+                    CreateSpawner(300, () => {
+                        var obj = new GameObject {
+                            transform = {
+                                position = this.transform.position
+                            }
+                        };
+                        var spawn = obj.AddComponent<Spawn06>();
                     });
                     break;
 
@@ -72,7 +83,7 @@ namespace _Scripts.BossBehaviour {
         }
 
         private void Start() {
-            SwitchCard(1,1);
+            SwitchCard(3,0);
         }
     }
 }

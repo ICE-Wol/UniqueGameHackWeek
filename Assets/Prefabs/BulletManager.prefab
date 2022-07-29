@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: -1370611839, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
   - {fileID: 48374496, guid: 8b611477e1fd1c34abfe91beeffeda8a, type: 3}
   - {fileID: -213811990, guid: 900e75d85d82d8c429f13826c9cf2fa3, type: 3}
+  - {fileID: -1155245449, guid: 900e75d85d82d8c429f13826c9cf2fa3, type: 3}
   laserSprite:
   - {fileID: 131209717, guid: 0306547681a72034da4fd11eff053494, type: 3}
   - {fileID: -1389009222, guid: 0306547681a72034da4fd11eff053494, type: 3}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -114,6 +115,28 @@ namespace _Scripts.Bullet {
             _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
             BulletRefresh(bullet, _tempProp);
         }
+        
+        /// <summary>
+        /// The bullet will move on its direction with a steady speed with calculation with rotation.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step06(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            _tempProp.rotation = Vector2.SignedAngle(Vector2.right, _tempProp.direction) + 90f;
+            _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
+        
+        /// <summary>
+        /// The bullet will move on its direction slower until a steady speed according to its order.
+        /// </summary>
+        /// <param name="bullet"></param>
+        public void Step07(Bullet bullet) {
+            _tempProp = bullet.Prop;
+            if(_tempProp.speed >= 0.5f + 0.1f * _tempProp.order) _tempProp.speed -= 0.1f;
+            _tempProp.worldPosition += _tempProp.speed * Time.fixedDeltaTime * _tempProp.direction;
+            BulletRefresh(bullet, _tempProp);
+        }
         #endregion
 
         #region DestroyEvent
@@ -160,6 +183,33 @@ namespace _Scripts.Bullet {
 
                 //register the target event
                 tempBullet.StepEvent += Manager.Step03;
+            }
+        }
+        
+        public void Destroy02(Bullet bullet) {
+            for (int i = 0; i < 3; i++) {
+                //pick a bullet out of the pool
+                var tempBullet = Manager.BulletActivate();
+                
+
+                //fill in the initial properties
+                //**Remember to initialize it before use.**
+                //fill in the index of the bullet
+                var tempProp = new BulletProperties();
+                tempProp.bullet = tempBullet;
+                tempProp.order = i;
+                tempProp.speed = (i + 1) * 1f;
+                tempProp.radius = 0.05f;
+                tempProp.direction = bullet.Prop.direction;
+                tempProp.worldPosition = bullet.transform.position;
+                tempProp.color = Color.white;
+
+                //initialize the bullet
+                Manager.BulletInitialize(tempBullet, 4, true);
+                Manager.BulletRefresh(tempBullet, tempProp);
+
+                //register the target event
+                tempBullet.StepEvent += Manager.Step06;
             }
         }
 
