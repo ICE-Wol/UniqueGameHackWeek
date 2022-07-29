@@ -16,6 +16,11 @@ namespace _Scripts {
                    Equal(argument1.y, argument2.y) &&
                    Equal(argument1.z, argument2.z);
         }
+        public static bool Equal(Vector3 argument1, Vector3 argument2, float epsilon) {
+            return Equal(argument1.x, argument2.x, epsilon) &&
+                   Equal(argument1.y, argument2.y, epsilon) &&
+                   Equal(argument1.z, argument2.z, epsilon);
+        }
 
         public static Vector3 Direction(float degree) {
             return new Vector3(Mathf.Cos(Mathf.Deg2Rad * degree), Mathf.Sin(Mathf.Deg2Rad * degree), 0f);
