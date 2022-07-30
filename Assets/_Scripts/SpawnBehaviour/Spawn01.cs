@@ -1,6 +1,5 @@
 ﻿using System;
 using _Scripts.Bullet;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace _Scripts.SpawnBehaviour {
@@ -36,7 +35,7 @@ namespace _Scripts.SpawnBehaviour {
                 //**Remember to initialize it before use.**
                 //fill in the index of the bullet
                 TempProp.bullet = TempBullet;
-                TempProp.radius = 0.5f;
+                TempProp.radius = 0.25f;
                 TempProp.direction = direction;
                 TempProp.worldPosition = _radius * direction + transform.position;
                 TempProp.speed = 3f;

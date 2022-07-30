@@ -14,6 +14,7 @@ namespace _Scripts.BossBehaviour {
         protected int CurrentForm;
         protected int CurrentCard;
         protected int CurrentHealth;
+        protected int CurrentMaxHealth;
         protected float CurrentTime;
         protected bool isClaimed;
         protected Vector3 TarPos;
@@ -22,16 +23,16 @@ namespace _Scripts.BossBehaviour {
 
         protected abstract void ClaimCard(int ordForm, int ordCard);
         
-        protected abstract void CheckCard(int ordForm, int ordCard);
+        protected abstract void CheckCard();
 
         protected void Movement() {
             var posPlayer = PlayerController.Controller.transform.position;
             var pos = transform.position;
             if (posPlayer.x >= pos.x) {
-                pos.x += Random.Range(0.5f, 1.5f);
+                pos.x += Random.Range(-0.5f, 1f);
             }
             else {
-                pos.x -= Random.Range(0.5f, 1.5f);
+                pos.x -= Random.Range(-0.5f, 1f);
             }
             pos.y += Random.Range(-0.5f, 0.5f);
 
@@ -46,10 +47,11 @@ namespace _Scripts.BossBehaviour {
         }
         
         protected void CreateSpawner(float loopTime, Action action) {
-            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 90) {
+            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 90) 
                 action?.Invoke();
+            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 30) 
                 Movement();
-            }
+            
         }
         
         public void CreateSpawner(Action action) {

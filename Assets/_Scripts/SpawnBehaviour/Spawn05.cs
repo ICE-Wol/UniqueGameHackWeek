@@ -6,6 +6,7 @@ namespace _Scripts.SpawnBehaviour {
     /// Spawn A circle of Bullets which move towards the player.
     /// </summary>
     public class Spawn05 : SpawnBehaviour {
+        public float dir;
         private float _radius;
         private float _degree;
         private void Start() {
@@ -25,7 +26,7 @@ namespace _Scripts.SpawnBehaviour {
                 if (TempBullet == null) Debug.Log("NullRef!!");
 
                 //some necessary calculations.
-                _degree = (i * 15 + Timer[0] * 5) * Mathf.Deg2Rad;
+                _degree = (dir + i * 15 + Timer[0] * 5) * Mathf.Deg2Rad;
                 Vector3 direction =
                     new Vector3(Mathf.Cos(_degree), Mathf.Sin(_degree), 0f);
 
@@ -33,7 +34,7 @@ namespace _Scripts.SpawnBehaviour {
                 //**Remember to initialize it before use.**
                 //fill in the index of the bullet
                 TempProp.bullet = TempBullet;
-                TempProp.radius = 0.5f;
+                TempProp.radius = 0.25f;
                 TempProp.direction = direction;
                 TempProp.worldPosition = _radius * direction + transform.position;
                 TempProp.speed = 6f;

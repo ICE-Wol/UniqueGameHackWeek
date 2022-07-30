@@ -1,4 +1,5 @@
-﻿using _Scripts.Bullet;
+﻿using _Scripts.BossBehaviour;
+using _Scripts.Bullet;
 using UnityEngine;
 
 namespace _Scripts.SpawnBehaviour {
@@ -43,6 +44,7 @@ namespace _Scripts.SpawnBehaviour {
         /// </summary>
         /// <param name="life">The life time in frame.</param>
         protected void SetLife(int life) {
+            CheckBossState();
             Timer[0]++;
             if(Timer[0] >= life) Destroy(this.gameObject);
         }
@@ -55,6 +57,12 @@ namespace _Scripts.SpawnBehaviour {
             TempProp = new BulletProperties();
             Timer = new int[8];
             ResetTimerAll();
+        }
+
+        protected void CheckBossState() {
+            if (BossSt00.BSt00.isChangingCard) {
+                DestroyImmediate(this.gameObject);
+            }
         }
         protected abstract void Spawn();
     }

@@ -1,4 +1,6 @@
 using System;
+using _Scripts.BossBehaviour;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -122,7 +124,7 @@ namespace _Scripts.Bullet {
                 case BulletStates.Activated: 
                     //Debug.Log("Activated!");
                     StepEvent?.Invoke(this);
-                    //CheckDistance();
+                    CheckDistance();
                     CheckOnField();
                     break;
                 case BulletStates.Destroying:
@@ -150,6 +152,11 @@ namespace _Scripts.Bullet {
         /// Alert that the z position will be ignored.
         /// </summary>
         private void CheckDistance() {
+            var boss = BossSt00.BSt00;
+            if (boss.isChangingCard) {
+                SetState(BulletStates.Destroying);
+                return;
+            }
             var player = PlayerController.Controller;
             float distance = ((Vector2) player.transform.position - 
                               (Vector2) _prop.worldPosition).magnitude;
@@ -161,8 +168,8 @@ namespace _Scripts.Bullet {
 
             if (_prop.radius + player.HitRadius >= distance) {
                 GameManager.Manager.NumHit += 1;
-                InactivateEvent();
-                BulletManager.Manager.BulletInactivate(this);
+                SetState(BulletStates.Destroying);
+                return;
             }
         }
         

@@ -14,24 +14,35 @@ namespace _Scripts {
         public Vector3 tarPos2;
         public Vector3 tarPos3;
         private bool _isShowing;
+        private bool _isSpellCard;
 
         public void ResetWithName(String name) {
+            _isSpellCard = true;
             _isShowing = false;
             spellName.text = name;
+            spellImage.anchoredPosition = oriPos1;
+            bossImage.anchoredPosition = oriPos2;
+        }
+        
+        public void ResetWithName() {
+            _isSpellCard = false;
+            _isShowing = false;
             spellImage.anchoredPosition = oriPos1;
             bossImage.anchoredPosition = oriPos2;
         }
 
         void Update()
         {
-            spellImage.anchoredPosition = Calc.Approach(spellImage.anchoredPosition, tarPos1, 32f * Vector3.one);
-            if (!_isShowing) {
-                bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos2, 32f * Vector3.one);
-                _isShowing = Calc.Equal(bossImage.anchoredPosition, tarPos2,1f);
-            }
+            if (_isSpellCard) {
+                spellImage.anchoredPosition = Calc.Approach(spellImage.anchoredPosition, tarPos1, 32f * Vector3.one);
+                if (!_isShowing) {
+                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos2, 32f * Vector3.one);
+                    _isShowing = Calc.Equal(bossImage.anchoredPosition, tarPos2, 1f);
+                }
 
-            if (_isShowing) {
-                bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos3, 32f * Vector3.one);
+                if (_isShowing) {
+                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos3, 32f * Vector3.one);
+                }
             }
         }
     }

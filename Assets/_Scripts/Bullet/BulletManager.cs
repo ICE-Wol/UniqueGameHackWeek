@@ -5,7 +5,6 @@ using System.Security.Cryptography.X509Certificates;
 using _Scripts.BossBehaviour;
 using _Scripts.SpawnBehaviour;
 using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -88,7 +87,7 @@ namespace _Scripts.Bullet {
         /// <param name="bullet"></param>
         public void Step03(Bullet bullet) {
             _tempProp = bullet.Prop;
-            if (!_tempProp.parent.gameObject.activeSelf) {
+            if (_tempProp.parent == null || !_tempProp.parent.gameObject.activeSelf) {
                 Manager.BulletInactivate(bullet);
                 return;
             }

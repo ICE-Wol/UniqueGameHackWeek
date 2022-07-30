@@ -3,7 +3,6 @@ using _Scripts.BossBehaviour;
 using _Scripts.Bullet;
 using _Scripts.MovementBehavior;
 using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace _Scripts.SpawnBehaviour {
