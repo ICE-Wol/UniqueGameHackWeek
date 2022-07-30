@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts {
     public class GameManager : MonoBehaviour
@@ -37,8 +38,16 @@ namespace _Scripts {
         #region Debug
         private void FixedUpdate() {
             textMesh.text
-                = "Graze: " + NumGraze + "\n" + "Hit: " + NumHit + "\nWorldTimer: " + WorldTimer;
+                = "Graze:  " + NumGraze + "\n" + "Hit:  " + NumHit + "\nWorldTimer:  " + WorldTimer;
             WorldTimer++;
+
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                Application.Quit();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+                SceneManager.LoadScene(1);
+            }
         }
         #endregion
     }

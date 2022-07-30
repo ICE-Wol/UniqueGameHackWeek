@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers.Text;
+using _Scripts.BossBehaviour;
 using _Scripts.Bullet;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ namespace _Scripts.SpawnBehaviour {
         }
 
         private void FixedUpdate() {
+            if (BossSt00.BSt00.GetCardNum() != 11) {
+                Destroy(this.gameObject);
+            }
             SetLife(life);
             if(SetTimerWithPeriod(1,1,90))
                 Spawn();
@@ -32,7 +36,7 @@ namespace _Scripts.SpawnBehaviour {
                 //**Remember to initialize it before use.**
                 //fill in the index of the bullet
                 TempProp.bullet = TempBullet;
-                TempProp.radius = 0.05f;
+                TempProp.radius = 0.08f;
                 TempProp.speed = 7f;
                 TempProp.direction = Calc.Direction(dir + i * 60);
                 TempProp.worldPosition = transform.position;

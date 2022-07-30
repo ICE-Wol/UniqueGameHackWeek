@@ -14,7 +14,6 @@ namespace _Scripts.SpawnBehaviour {
         private void Start() {
             Initialize();
             _bullets = new Bullet.Bullet[6];
-            Spawn();
         }
 
         private void FixedUpdate() {
@@ -77,7 +76,7 @@ namespace _Scripts.SpawnBehaviour {
                 //**Remember to initialize it before use.**
                 //fill in the index of the bullet
                 TempProp.bullet = TempBullet;
-                TempProp.radius = 0.1f;
+                TempProp.radius = 0.2f;
                 TempProp.order = i;
                 TempProp.worldPosition = transform.position;
                 var c = Color.white;

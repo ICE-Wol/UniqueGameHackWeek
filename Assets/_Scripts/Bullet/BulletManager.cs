@@ -88,7 +88,7 @@ namespace _Scripts.Bullet {
         public void Step03(Bullet bullet) {
             _tempProp = bullet.Prop;
             if (_tempProp.parent == null || !_tempProp.parent.gameObject.activeSelf) {
-                Manager.BulletInactivate(bullet);
+                bullet.SetState(BulletStates.Destroying);
                 return;
             }
             var degree = (_tempProp.order * 360f / 5f + GameManager.Manager.WorldTimer / 10f);
@@ -260,6 +260,32 @@ namespace _Scripts.Bullet {
                 };
                 var spawn = obj.AddComponent<Spawn07>();
             });
+        }
+        
+        public void Destroy04(Bullet bullet) {
+            for (int i = 0; i < 3; i++) {
+                //pick a bullet out of the pool
+                var tempBullet = Manager.BulletActivate();
+                
+                //fill in the initial properties
+                //**Remember to initialize it before use.**
+                //fill in the index of the bullet
+                var tempProp = new BulletProperties();
+                tempProp.bullet = tempBullet;
+                tempProp.order = i;
+                tempProp.speed = (i + 1) * 1f;
+                tempProp.radius = 0.03f;
+                tempProp.direction = bullet.Prop.direction;
+                tempProp.worldPosition = bullet.transform.position;
+                tempProp.color = Color.white;
+
+                //initialize the bullet
+                Manager.BulletInitialize(tempBullet, 33, true);
+                Manager.BulletRefresh(tempBullet, tempProp);
+
+                //register the target event
+                tempBullet.StepEvent += Manager.Step06;
+            }
         }
 
         #endregion

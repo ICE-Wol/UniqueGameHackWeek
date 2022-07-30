@@ -61,7 +61,7 @@ namespace _Scripts.SpawnBehaviour {
 
         protected void CheckBossState() {
             if (BossSt00.BSt00.isChangingCard) {
-                DestroyImmediate(this.gameObject);
+                Destroy(this.gameObject);
             }
         }
         protected abstract void Spawn();

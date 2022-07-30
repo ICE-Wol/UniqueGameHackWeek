@@ -18,6 +18,7 @@ namespace _Scripts.BossBehaviour {
         protected float CurrentTime;
         protected bool isClaimed;
         protected Vector3 TarPos;
+        public bool isChangingCard;
 
         protected abstract void SwitchCard(int ordForm, int ordCard);
 
@@ -47,15 +48,26 @@ namespace _Scripts.BossBehaviour {
         }
         
         protected void CreateSpawner(float loopTime, Action action) {
-            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 90) 
+            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 90) {
+                isChangingCard = false;
                 action?.Invoke();
+            }
+
             if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 30) 
                 Movement();
             
         }
-        
+
         public void CreateSpawner(Action action) {
             action?.Invoke();
+        }
+
+        public int GetCardNum() {
+            return CurrentForm * 10 + CurrentCard;
+        }
+
+        public void TakeDamage(int damage) {
+            CurrentHealth -= damage;
         }
     }
 }

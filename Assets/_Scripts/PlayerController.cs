@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 namespace _Scripts {
@@ -26,10 +27,12 @@ namespace _Scripts {
 
         [SerializeField] private float speed;
         [SerializeField] private float slowRate;
+        [SerializeField] private GameObject missile;
     
         private float _horizontal;
         private float _vertical;
         private float _slowMode;
+        private int _timer;
         private Vector3 _direction;
 
         /// <summary>
@@ -44,10 +47,20 @@ namespace _Scripts {
             //Refresh the position
             _direction
                 = new Vector3(_horizontal, _vertical, 0).normalized;
-            transform.position
-                += (_slowMode > 0.5f ? speed * slowRate : speed) 
-                   * Time.deltaTime * _direction;
-        
+            var offset = transform.position + (_slowMode > 0.5f ? speed * slowRate : speed) 
+                         * Time.fixedDeltaTime * _direction;
+            if (offset.x <= GameManager.Manager.BottomRight.x ||
+                offset.y >= GameManager.Manager.BottomRight.y ||
+                offset.x >= GameManager.Manager.TopLeft.x ||
+                offset.y <= GameManager.Manager.TopLeft.y ) {
+                transform.position = offset;
+            }
+
+        }
+
+        private void Fire() {
+            if(_timer % 2 == 0)
+                Instantiate(missile, transform.position,Quaternion.Euler(0f,0f,0f));
         }
 
         private void Awake() {
@@ -56,8 +69,12 @@ namespace _Scripts {
             else DestroyImmediate(this.gameObject);
         }
 
-        private void Update() {
+        private void FixedUpdate() {
+            _timer++;
             PlayerMovement();
+            if (Input.GetAxisRaw("Fire1") >= 0.5f) {
+                Fire();
+            }
         }
 
         private void OnDrawGizmos() {

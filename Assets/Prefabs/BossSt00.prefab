@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: -0.1, y: 0.1, z: 0}
   m_LocalScale: {x: 0.1004, y: 0.1004, z: 0.1004}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4365429047011942815}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,5 +110,83 @@ MonoBehaviour:
   - none
   - "\u65E2\u671B\u300E\u6C38\u6052\u6708\u534E\u7ED3\u754C\u300F"
   timeCard: 1e000000280000001e000000280000001e0000003c000000
-  sp: {fileID: 8047550061970588133, guid: 0d2b5e620898ab04498e692cf60df819, type: 3}
-  ch: {fileID: 4365429047052596959, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+  isChangingCard: 0
+  sp: {fileID: 0}
+  ch: {fileID: 4365429047011942882}
+  normalBg: {fileID: 0}
+  spellBg: {fileID: 0}
+  stars: {fileID: 2535179611909822076, guid: f846a03e1b2175c4e841ef964ac79bc3, type: 3}
+  emission: {fileID: 2229135594083077031, guid: a8689f7522cee2b4ab5473810b36de3c, type: 3}
+--- !u!1001 &250369853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3779026047290196949}
+    m_Modifications:
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.019494597
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365429047052596958, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+      propertyPath: m_Name
+      value: CircularHealthBar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+--- !u!4 &4365429047011942815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4365429047052596898, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+  m_PrefabInstance: {fileID: 250369853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4365429047011942882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4365429047052596959, guid: 26fcd5890b6d527418d7a08d74fca366, type: 3}
+  m_PrefabInstance: {fileID: 250369853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a78ef93d1802141bfb5916946f968d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

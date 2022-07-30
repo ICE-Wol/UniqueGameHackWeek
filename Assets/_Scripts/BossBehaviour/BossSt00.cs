@@ -11,9 +11,13 @@ using Random = UnityEngine.Random;
 namespace _Scripts.BossBehaviour {
     public class BossSt00 : BossBehaviour {
         public static BossSt00 BSt00;
-        public bool isChangingCard;
         [SerializeField] private SpellProclamation sp;
         [SerializeField] private CircularHealthBar ch;
+        [SerializeField] private GameObject normalBg;
+        [SerializeField] private GameObject spellBg;
+        [SerializeField] private GameObject stars;
+        [SerializeField] private GameObject emission;
+        //private List<GameObject> _stars;
         private GameObject[] _spawnerList;
         private void Start() {
             if (BSt00 == null) {
@@ -27,6 +31,11 @@ namespace _Scripts.BossBehaviour {
             isClaimed = false;
             isChangingCard = false;
             TarPos = transform.position;
+            /*_stars = new List<GameObject>();
+            for (int i = 0; i <= 2; i++) {
+                var obj = Instantiate(stars);
+                _stars.Add(obj);
+            }*/
         }
 
         private void FixedUpdate() {
@@ -37,23 +46,34 @@ namespace _Scripts.BossBehaviour {
                 isClaimed = true;
             }
             SwitchCard(CurrentForm,CurrentCard);
-            if (Input.anyKey) CurrentHealth -= 10;
+            //if (Input.anyKey) CurrentHealth -= 10;
             //.Log(CurrentHealth + " " + CurrentMaxHealth);
             CheckCard();
             ch.Refresh((float)CurrentHealth / CurrentMaxHealth);
             //ch.transform.position = this.transform.position;
         }
         
-        
-        
         protected override void ClaimCard(int ordForm, int ordCard) {
-            isChangingCard = false;
+            if (ordForm * 2 + ordCard >= 6) {
+                sp.ResetWithName();
+                normalBg.SetActive(true);
+                spellBg.SetActive(false);
+                return;
+            }
             StartTime = GameManager.Manager.WorldTimer;
             CurrentTime = timeCard[ordForm * 2 + ordCard];
             CurrentHealth = hpCard[ordForm * 2 + ordCard];
             CurrentMaxHealth = hpCard[ordForm * 2 + ordCard];
-            if (ordCard != 0) sp.ResetWithName(nameCard[ordForm * 2 + ordCard]);
-            else sp.ResetWithName();
+            if (ordCard != 0) {
+                sp.ResetWithName(nameCard[ordForm * 2 + ordCard]);
+                normalBg.SetActive(false);
+                spellBg.SetActive(true);
+            }
+            else {
+                sp.ResetWithName();
+                normalBg.SetActive(true);
+                spellBg.SetActive(false);
+            }
         }
 
         protected override void CheckCard() {
@@ -69,7 +89,6 @@ namespace _Scripts.BossBehaviour {
                 isClaimed = false;
                 isChangingCard = true;
             }
-            
         }
 
         protected override void SwitchCard(int ordForm, int ordCard) {
@@ -133,7 +152,7 @@ namespace _Scripts.BossBehaviour {
                     });
                     break;
                 case 11:
-                    CreateSpawner(300, () => {
+                    CreateSpawner(600, () => {
                         var obj = new GameObject {
                             transform = {
                                 position = this.transform.position
@@ -155,6 +174,31 @@ namespace _Scripts.BossBehaviour {
                         var spawn = obj.AddComponent<Spawn04>();
                         spawn.cnt = 1;
                     });
+                    break;
+                case 21:
+                    for (int i = 0; i < 6; i++) {
+                        CreateSpawner(600000, () => {
+                            var obj = new GameObject {
+                                transform = {
+                                    position = this.transform.position
+                                }
+                            };
+                            obj.tag = "Spawner";
+                            var spawn = obj.AddComponent<Spawn11>();
+                            spawn.ord = i;
+                        });
+                    }
+                    CreateSpawner(600, () => {
+                        var obj = new GameObject {
+                            transform = {
+                                position = (GameManager.Manager.BottomRight + GameManager.Manager.TopLeft) / 2
+                            }
+                        };
+                        obj.tag = "Spawner";
+                        var spawn = obj.AddComponent<Spawn12>();
+                    });
+                    break;
+                case 31:
                     break;
             }
         }

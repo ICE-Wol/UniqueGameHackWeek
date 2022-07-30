@@ -34,14 +34,14 @@ namespace _Scripts {
         void Update()
         {
             if (_isSpellCard) {
-                spellImage.anchoredPosition = Calc.Approach(spellImage.anchoredPosition, tarPos1, 32f * Vector3.one);
+                spellImage.anchoredPosition = Calc.Approach(spellImage.anchoredPosition, tarPos1, 16f * Vector3.one);
                 if (!_isShowing) {
-                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos2, 32f * Vector3.one);
+                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos2, 16f * Vector3.one);
                     _isShowing = Calc.Equal(bossImage.anchoredPosition, tarPos2, 1f);
                 }
 
                 if (_isShowing) {
-                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos3, 32f * Vector3.one);
+                    bossImage.anchoredPosition = Calc.Approach(bossImage.anchoredPosition, tarPos3, 16f * Vector3.one);
                 }
             }
         }

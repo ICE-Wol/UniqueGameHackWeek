@@ -34,7 +34,7 @@ namespace _Scripts.SpawnBehaviour {
                 //**Remember to initialize it before use.**
                 //fill in the index of the bullet
                 TempProp.bullet = TempBullet;
-                TempProp.radius = 0.25f;
+                TempProp.radius = 0.2f;
                 TempProp.direction = direction;
                 TempProp.worldPosition = _radius * direction + transform.position;
                 TempProp.speed = 6f;
