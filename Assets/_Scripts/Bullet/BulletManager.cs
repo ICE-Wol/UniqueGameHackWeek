@@ -6,6 +6,7 @@ using _Scripts.BossBehaviour;
 using _Scripts.SpawnBehaviour;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 //U should be informed that all classes which u define are implicitly derived from the class Object.
@@ -35,7 +36,14 @@ namespace _Scripts.Bullet {
         [SerializeField] private List<Sprite> laserSprite;
         [SerializeField] private List<Material> material;
     
+        /// <summary>
+        /// bullet pool.
+        /// data structure.
+        /// </summary>
         private Stack<Bullet> _bulletPool;
+        
+
+        //private ObjectPool<Bullet> _pool;
 
         private Bullet _tempBullet;
         private BulletProperties _tempProp;
@@ -379,5 +387,6 @@ namespace _Scripts.Bullet {
             _tempProp = new BulletProperties();
             BulletPoolAdd(512);
         }
+        
     }
 }

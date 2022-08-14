@@ -17,6 +17,7 @@ namespace _Scripts.BossBehaviour {
         [SerializeField] private GameObject spellBg;
         [SerializeField] private GameObject stars;
         [SerializeField] private GameObject emission;
+        
         //private List<GameObject> _stars;
         private GameObject[] _spawnerList;
         private void Start() {
@@ -55,6 +56,7 @@ namespace _Scripts.BossBehaviour {
         
         protected override void ClaimCard(int ordForm, int ordCard) {
             if (ordForm * 2 + ordCard >= 6) {
+                gameObject.SetActive(false);
                 sp.ResetWithName();
                 normalBg.SetActive(true);
                 spellBg.SetActive(false);

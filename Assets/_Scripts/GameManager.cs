@@ -28,8 +28,14 @@ namespace _Scripts {
         }
 
         private void Start() {
-            foreach (var inst in instantiateList) {
-                if(inst != null) Instantiate(inst);
+            for (int i = 0; i <= 1; i++) {
+                var obj = Instantiate(instantiateList[i]);
+                if (i == 1) {
+                    var pos = (TopLeft + BottomRight) / 2f;
+                    pos.y -= 4f;
+                    obj.transform.position = pos;
+                }
+                
             }
 
             WorldTimer = 0;

@@ -48,7 +48,7 @@ namespace _Scripts.BossBehaviour {
         }
         
         protected void CreateSpawner(float loopTime, Action action) {
-            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 90) {
+            if ((GameManager.Manager.WorldTimer - StartTime) % loopTime == 120) {
                 isChangingCard = false;
                 action?.Invoke();
             }
